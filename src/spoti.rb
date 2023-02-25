@@ -10,6 +10,10 @@ puts me.playlists #=> (Playlist array)
 
 playlists = me.playlists
 
+playlists.each do |playlist|
+    puts playlist.name
+end
+
 playlists[0].tracks.each do | track | 
     puts track.name
     puts track.audio_features.danceability
