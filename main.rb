@@ -66,7 +66,7 @@ $client.on :message do |message|
   embed_built.set_title("Szia #{user_name}")
              .set_description("Több playlistet is találtunk a profilodon")
              .set_thumbnail("https://1000logos.net/wp-content/uploads/2017/06/Ubuntu-Logo.png")
-             .add_field("Válaszd ki azt amelyiket szeretnéd hogy értékeljem", "...")
+             .add_field("Válaszd ki azt amelyiket szeretnéd hogy értékeljem.", "...")
              .set_color(30, 215, 96)       
 
   playlists.each_with_index do | playlist , index | 
@@ -86,6 +86,8 @@ $client.on :select_menu_select do |response|
 
   playlist = response.value[0]
   user_name = response.value[playlist.length + 1, response.value.length]
+
+  user = Spotify::User.new(user_name)
 
   puts "playlist: #{playlist} username: #{user_name}"
 

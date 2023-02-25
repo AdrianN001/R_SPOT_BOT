@@ -39,6 +39,29 @@ module Spotify
             @playlist = spotify_playlist
         end
 
+        def analize 
+            =begin
+                Get an array of the : 
+                                        -danceability
+                                        -energy
+                                        -tempo
+                                        -length (duration_ms)
+                                        
+                
+            =end
+            track_size = @playlist.length
+
+            danceability = [] 
+            energy = []
+            tempo = []
+            length = []
+            
+            threads = []   # One thread should do only ~20 song
+
+
+
+
+
     end
 
 
