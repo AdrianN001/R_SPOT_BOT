@@ -14,6 +14,11 @@ module Builder
             return self
         end
 
+        def set_image( img )
+            @embed.image = img 
+            return self
+        end
+
         def set_description( description ) 
             @embed.description = description
             return self 

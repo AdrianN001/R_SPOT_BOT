@@ -82,17 +82,37 @@ $client.on :message do |message|
 end
 
 $client.on :select_menu_select do |response|
+  puts response.class
   next unless response.custom_id == "selection_custom_id"
+  response.post("Számolas...")
 
   playlist = response.value[0]
   user_name = response.value[playlist.length + 1, response.value.length]
 
   user = Spotify::User.new(user_name)
+  analizer = Spotify::Analizer.new(user.get_track_of_playlist(playlist.to_i))
+  analizer.analize
+  result = analizer.get_result
 
-  puts "playlist: #{playlist} username: #{user_name}"
+  desc, name, img = user.get_playlist_data
 
-  response.post(
-    response.value,
-    ephemeral:true
-  )
+  result_embed = Builder::Embed_Factory.new
+  result_embed.set_title(name)
+              .set_description(desc)
+              .set_color(30, 215, 96)  
+              .set_image(img)
+  
+  result.each do | k,v | 
+    result_embed.add_field(k, v)
+  end
+
+  response.channel.post("Eredmény: ",embed: result_embed.build)
+
+
+  # puts "playlist: #{playlist} username: #{user_name}"
+
+  # response.post(
+  #   response.value,
+  #   ephemeral:true
+  # )
 end
