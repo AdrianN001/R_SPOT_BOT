@@ -28,22 +28,36 @@ end
 # end
 
 
-class Session 
+class Analizer
 
-    def initalize( user_name )
+    def initalize( spotify_playlist ) 
+        @playlist = spotify_playlist
+    end
+
+    def 
+
+class Spotify_User
+
+    attr_accessor user_name
+
+    def initalize( user_name ) 
         @user_name = user_name
-        begin                                                # try
-            @user_profile = RSpotify::User.find(user_name)
-        rescue                                               # catch
-            puts "[*] Error: no user as #{user_name}"
+        
+        begin                                          # try 
+            @user_object = RSpotify::User.find()
+        rescue => exception                            # catch 
+            puts "[*] ERROR: No spotify user as #{user_name}"
         end
-    
     end
 
-
-    def get_playlist( playlist_id ) 
+    def get_playlist()
+        #returns the playlists of the user_object
+        return @user_object.playlists
     end
 
-    def get_favourites() 
+    def get_track_of_playlist(playlist_id)
+        # Playlist id = index of playlists  
+        return @user_object.playlist[playlist_id].tracks
     end
+
 end
